@@ -27,7 +27,7 @@
 
 .product-item {
     width: 250px;
-    height: 350px;
+    height: 290px;
     background-color: lightgrey;
     border: 1px solid black;
     border-radius: 10px;
@@ -40,6 +40,7 @@
 
 .product-item img {
     width: 180px;
+    height: 140px;
     display: block;
     align-self: center;
 }
