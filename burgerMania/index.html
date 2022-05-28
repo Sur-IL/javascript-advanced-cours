@@ -3,7 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BurgerMania</title>
 </head>
 
 <body>
@@ -49,13 +51,13 @@
                 Кол-во калорий: <span id="calories">0</span></p>
         </fieldset>
     </form>
-    <script src="burgerFactory.js"></script>
+    <script src="burger.js"></script>
     <script>
         window.onload = () => {
-            document.getElementById("check").addEventListener('click', () => {
+            document.getElementById('check').addEventListener('click', () => {
                 let burger = new Burger('size', 'add', 'topings');
                 console.log(burger);
-                burger.showSum("#price", "#calories");
+                burger.showSum('#price', '#calories');
             });
         }
     </script>
