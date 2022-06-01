@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div></div>
+
+    <script>
+
+        const getDollarValue = async () => {
+            // с помощью фунции fetch получаем объект promise
+            const response = await
+                fetch("https://www.cbr-xml-daily.ru/daily_json.js");
+            // из promise получаем массив объектов JS
+            const valuets = await response.json();
+            // в valuets находим необходимые данные и присваиваем их в переменную
+            let dollar = valuets['Valute']['USD']['Value'];
+            // console.log(dollar);
+            return dollar; // возвращаем переменную
+        }
+
+        // getDollarValue();
+
+
+        const getBalance = async () => {
+            // при помощи оператора await дожидаемся полного 
+            // выполнения асинхронной функции getDollarValue()
+            let dollarValue = await getDollarValue();
+            // console.log(dollarValue);
+            fetch('phonebook.json')
+                // к тексту со строкой json применяем метод json, который 
+                // преобразует строку json в объект JS и вернет promise
+                .then(text => text.json())
+                .then(data => {
+                    // каждому элементу массива объктов применяем метод 
+                    // insertAdjacentHTML и вставляем необходимый текст 
+                    // в соответствующий div
+                    data.forEach(element => {
+                        document.querySelector('div')
+                            .insertAdjacentHTML('beforeend',
+                                `Абоненет ${element.name} имеет номер телефона 
+                                ${element.phone} баланс его телефона 
+                                $${(element.balance / dollarValue).toFixed(1)} 
+                                <hr>`)
+                    });
+                })
+        }
+
+        getBalance();
+
+    </script>
+</body>
+
+</html>
